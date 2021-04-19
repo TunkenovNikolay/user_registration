@@ -1,7 +1,7 @@
 package com.tunkenov.user_registration.service;
 
 import com.tunkenov.user_registration.dto.UserDTO;
-import com.tunkenov.user_registration.mapping.EntityConverter;
+import com.tunkenov.user_registration.converter.EntityConverter;
 import com.tunkenov.user_registration.model.entity.User;
 import com.tunkenov.user_registration.model.repository.UserRepository;
 import org.springframework.stereotype.Service;

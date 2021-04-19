@@ -1,4 +1,4 @@
-package com.tunkenov.user_registration.mapping;
+package com.tunkenov.user_registration.converter;
 
 import com.tunkenov.user_registration.dto.UserDTO;
 import com.tunkenov.user_registration.model.entity.User;
