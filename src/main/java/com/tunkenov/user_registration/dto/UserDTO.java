@@ -3,8 +3,17 @@ package com.tunkenov.user_registration.dto;
 import java.util.Objects;
 
 public class UserDTO {
+    private Long id;
     private String first_name;
     private String last_Name;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getFirst_name() {
         return first_name;

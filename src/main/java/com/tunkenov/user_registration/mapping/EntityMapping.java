@@ -12,6 +12,7 @@ public class EntityMapping {
         UserDTO userDTO = new UserDTO();
         userDTO.setFirst_name(user.getFirstName());
         userDTO.setLast_Name(user.getLastName());
+        userDTO.setId(user.getId());
         return userDTO;
     }
 
