@@ -12,13 +12,15 @@
 
 Для запуска приложения необходим Docker, в папке с файлом docker-compose.yml необходимо выполнить команду docker-compose up. 
 После запуска поднимается база данных postgres на порте 5432 и запуститься веб-сервис по локальному адресу http://localhost:8080/users.  
-Вся документация об используемых api находится в swagger'e по ссылке http://localhost:8080/swager-ui.html.
+Вся документация об используемых api находится в swagger'e по ссылке http://localhost:8080/users/swagger-ui.
 
 **Используемые технологии**
-- Java
-- Spring-boot
-- Postgres
-- Docker
+- Java;
+- Spring-boot;
+- Postgres;
+- Swagger 3.0;
+- Docker;
+- REST.
 
 
 **Edit By** *Tunkenov Nikolay* 
