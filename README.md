@@ -15,10 +15,11 @@
 Вся документация об используемых api находится в swagger'e по ссылке http://localhost:8080/swager-ui.html.
 
 **Используемые технологии**
-- Java
-- Spring-boot
-- Postgres
-- Docker
+- Java;
+- Spring-boot;
+- Postgres;
+- Docker;
+- REST.
 
 
 **Edit By** *Tunkenov Nikolay* 
