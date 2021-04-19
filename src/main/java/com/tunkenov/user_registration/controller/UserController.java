@@ -2,8 +2,8 @@ package com.tunkenov.user_registration.controller;
 
 import com.tunkenov.user_registration.dto.UserDTO;
 import com.tunkenov.user_registration.service.UserService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,36 +17,36 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ApiOperation("Загрузка всех пользователей.")
+    @Operation(description = "Загрузка всех пользователей.")
     @GetMapping
     public List<UserDTO> findAllUsers() {
         return userService.findAll();
     }
 
-    @ApiOperation("Загрузка пользователя по id.")
+    @Operation(description = "Загрузка пользователя по id.")
     @GetMapping("/{id}")
-    public UserDTO findUser(@ApiParam("ID пользователя.") @PathVariable("id") Long id) {
+    public UserDTO findUser(/*@Parameter(description = "ID пользователя.")*/ @PathVariable("id") Long id) {
         return userService.getOne(id);
     }
 
-    @ApiOperation("Регистрация нового пользователя.")
-    @PutMapping
+    @Operation(description = "Регистрация нового пользователя.")
+    @PostMapping
     @ResponseBody
-    public UserDTO saveUser(@ApiParam("Имя и Фамилия пользователя.") @RequestBody UserDTO userDTO) {
+    public UserDTO saveUser(@Parameter(description = "Данные пользователя (Имя и Фамилия).") @RequestBody UserDTO userDTO) {
         return userService.saveUser(userDTO);
     }
 
-    @ApiOperation("Редактирование информации пользователя по id.")
-    @PostMapping("/{id}")
+    @Operation(description = "Редактирование информации пользователя по id.")
+    @PutMapping("/{id}")
     @ResponseBody
-    public UserDTO updateUser(@ApiParam("ID пользователя.") @PathVariable("id") Long id,
-                              @ApiParam("Новые данные пользователя.") @RequestBody UserDTO userDTO) {
+    public UserDTO updateUser(@Parameter(description = "ID пользователя.") @PathVariable("id") Long id,
+                              @Parameter(description = "Новые данные пользователя.") @RequestBody UserDTO userDTO) {
         return userService.updateUser(id, userDTO);
     }
 
-    @ApiOperation("Удаление пользователя по id.")
+    @Operation(description = "Удаление пользователя по id.")
     @DeleteMapping("/{id}")
-    public void deleteUser(@ApiParam("ID пользователя.") @PathVariable("id") Long id) {
+    public void deleteUser(@Parameter(description = "ID пользователя.") @PathVariable("id") Long id) {
         userService.deleteUser(id);
     }
 }
