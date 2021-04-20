@@ -1,6 +1,7 @@
 package com.tunkenov.user_registration.controller;
 
-import com.tunkenov.user_registration.dto.UserDTO;
+import com.tunkenov.user_registration.dto.InputUserDTO;
+import com.tunkenov.user_registration.dto.OutputUserDTO;
 import com.tunkenov.user_registration.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,29 +20,29 @@ public class UserController {
 
     @Operation(description = "Загрузка всех пользователей.")
     @GetMapping
-    public List<UserDTO> findAllUsers() {
+    public List<OutputUserDTO> findAllUsers() {
         return userService.findAll();
     }
 
     @Operation(description = "Загрузка пользователя по id.")
     @GetMapping("/{id}")
-    public UserDTO findUser(/*@Parameter(description = "ID пользователя.")*/ @PathVariable("id") Long id) {
-        return userService.getOne(id);
+    public OutputUserDTO findUser(@Parameter(description = "ID пользователя.") @PathVariable("id") Long id) {
+        return userService.findById(id);
     }
 
     @Operation(description = "Регистрация нового пользователя.")
     @PostMapping
     @ResponseBody
-    public UserDTO saveUser(@Parameter(description = "Данные пользователя (Имя и Фамилия).") @RequestBody UserDTO userDTO) {
-        return userService.saveUser(userDTO);
+    public OutputUserDTO saveUser(@Parameter(description = "Данные пользователя (Имя и Фамилия).") @RequestBody InputUserDTO inputUserDTO) {
+        return userService.saveUser(inputUserDTO);
     }
 
     @Operation(description = "Редактирование информации пользователя по id.")
     @PutMapping("/{id}")
     @ResponseBody
-    public UserDTO updateUser(@Parameter(description = "ID пользователя.") @PathVariable("id") Long id,
-                              @Parameter(description = "Новые данные пользователя.") @RequestBody UserDTO userDTO) {
-        return userService.updateUser(id, userDTO);
+    public OutputUserDTO updateUser(@Parameter(description = "ID пользователя.") @PathVariable("id") Long id,
+                                    @Parameter(description = "Новые данные пользователя (Имя и Фамилия.") @RequestBody InputUserDTO inputUserDTO) {
+        return userService.updateUser(id, inputUserDTO);
     }
 
     @Operation(description = "Удаление пользователя по id.")
