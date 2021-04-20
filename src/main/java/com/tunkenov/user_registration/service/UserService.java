@@ -2,46 +2,19 @@ package com.tunkenov.user_registration.service;
 
 import com.tunkenov.user_registration.dto.InputUserDTO;
 import com.tunkenov.user_registration.dto.OutputUserDTO;
-import com.tunkenov.user_registration.converter.EntityConverter;
-import com.tunkenov.user_registration.exceptions.MyEntityNotFoundException;
-import com.tunkenov.user_registration.model.entity.User;
-import com.tunkenov.user_registration.model.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
-    UserRepository userRepository;
+public interface UserService {
+    List<OutputUserDTO> findAll();
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    OutputUserDTO findById(Long id);
 
-    public List<OutputUserDTO> findAll() {
-        return EntityConverter.mapToOutputUserDTOList(userRepository.findAll());
-    }
+    OutputUserDTO saveUser(InputUserDTO inputUserDTO);
 
-    public OutputUserDTO findById(Long id) {
-        return EntityConverter.mapToOutputUserDTO(userRepository.findById(id).orElseThrow(() -> new MyEntityNotFoundException(id)));
-    }
+    OutputUserDTO updateUser(Long id, InputUserDTO inputUserDTO);
 
-    public OutputUserDTO saveUser(InputUserDTO inputUserDTO) {
-        return EntityConverter.mapToOutputUserDTO(userRepository.save(EntityConverter.mapToUser(inputUserDTO)));
-    }
-
-    public OutputUserDTO updateUser(Long id, InputUserDTO inputUserDTO) {
-        OutputUserDTO outputUserDTO = findById(id);
-
-        User user = EntityConverter.mapToUser(outputUserDTO);
-        user.setFirstName(inputUserDTO.getFirstName());
-        user.setLastName(inputUserDTO.getLastName());
-
-        return EntityConverter.mapToOutputUserDTO(userRepository.save(user));
-    }
-
-    public void deleteUser(Long id) {
-        findById(id);
-        userRepository.deleteById(id);
-    }
+    void deleteUser(Long id);
 }

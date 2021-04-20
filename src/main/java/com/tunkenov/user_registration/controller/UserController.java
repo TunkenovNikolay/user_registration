@@ -3,6 +3,7 @@ package com.tunkenov.user_registration.controller;
 import com.tunkenov.user_registration.dto.InputUserDTO;
 import com.tunkenov.user_registration.dto.OutputUserDTO;
 import com.tunkenov.user_registration.service.UserService;
+import com.tunkenov.user_registration.service.user_service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -21,8 +22,8 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserServiceImpl userServiceImpl) {
+        this.userService = userServiceImpl;
     }
 
     @Operation(description = "Загрузка всех пользователей.")
