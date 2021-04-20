@@ -4,13 +4,17 @@ import com.tunkenov.user_registration.dto.InputUserDTO;
 import com.tunkenov.user_registration.dto.OutputUserDTO;
 import com.tunkenov.user_registration.converter.EntityConverter;
 import com.tunkenov.user_registration.exceptions.MyEntityNotFoundException;
+import com.tunkenov.user_registration.model.entity.User;
 import com.tunkenov.user_registration.model.repository.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserService {
+    private static final Logger logger = LogManager.getLogger();
     UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
@@ -30,10 +34,17 @@ public class UserService {
     }
 
     public OutputUserDTO updateUser(Long id, InputUserDTO inputUserDTO) {
-        return EntityConverter.mapToOutputUserDTO(userRepository.save(EntityConverter.mapToUser(findById(id))));
+        OutputUserDTO outputUserDTO = findById(id);
+
+        User user = EntityConverter.mapToUser(outputUserDTO);
+        user.setFirstName(inputUserDTO.getFirstName());
+        user.setLastName(inputUserDTO.getLastName());
+
+        return EntityConverter.mapToOutputUserDTO(userRepository.save(user));
     }
 
     public void deleteUser(Long id) {
+        findById(id);
         userRepository.deleteById(id);
     }
 }

@@ -5,13 +5,20 @@ import com.tunkenov.user_registration.dto.OutputUserDTO;
 import com.tunkenov.user_registration.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RequestMapping("/users")
 @RestController
 public class UserController {
+    private static final Logger logger = LogManager.getLogger();
+
     private final UserService userService;
 
     public UserController(UserService userService) {
