@@ -6,15 +6,12 @@ import com.tunkenov.user_registration.converter.EntityConverter;
 import com.tunkenov.user_registration.exceptions.MyEntityNotFoundException;
 import com.tunkenov.user_registration.model.entity.User;
 import com.tunkenov.user_registration.model.repository.UserRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserService {
-    private static final Logger logger = LogManager.getLogger();
     UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
