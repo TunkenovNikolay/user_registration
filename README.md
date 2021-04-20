@@ -18,7 +18,7 @@
 - Java;
 - Spring-boot;
 - Postgres;
-- Swagger 3.0;
+- OpenAPI (Swagger 3.0);
 - Docker;
 - REST.
 
