@@ -53,9 +53,6 @@ public class OutputUserDTO {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-                "first_name='" + firstName + '\'' +
-                ", last_Name='" + lastName + '\'' +
-                '}';
+        return "UserDTO{first_name='" + firstName + '\'' + ", last_Name='" + lastName + '\'' + '}';
     }
 }

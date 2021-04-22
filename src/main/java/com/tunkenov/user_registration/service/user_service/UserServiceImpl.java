@@ -7,12 +7,15 @@ import com.tunkenov.user_registration.exceptions.MyEntityNotFoundException;
 import com.tunkenov.user_registration.model.entity.User;
 import com.tunkenov.user_registration.model.repository.UserRepository;
 import com.tunkenov.user_registration.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
     UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
@@ -31,7 +34,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public OutputUserDTO saveUser(InputUserDTO inputUserDTO) {
-        return EntityConverter.mapToOutputUserDTO(userRepository.save(EntityConverter.mapToUser(inputUserDTO)));
+        User user = EntityConverter.mapToUser(inputUserDTO);
+        userRepository.save(user);
+
+        logger.debug("Сохранен в базу данных новый пользователь: " + user);
+
+        return EntityConverter.mapToOutputUserDTO(user);
     }
 
     @Override
@@ -42,12 +50,19 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(inputUserDTO.getFirstName());
         user.setLastName(inputUserDTO.getLastName());
 
-        return EntityConverter.mapToOutputUserDTO(userRepository.save(user));
+        userRepository.save(user);
+
+        logger.debug("Новые данные user под номером id = " + id + " сохранен в базу данных: " + user);
+
+        return EntityConverter.mapToOutputUserDTO(user);
     }
 
     @Override
     public void deleteUser(Long id) {
-        findById(id);
+        OutputUserDTO outputUserDTO = findById(id);
+
         userRepository.deleteById(id);
+
+        logger.debug("Удален пользователь: " + outputUserDTO);
     }
 }
