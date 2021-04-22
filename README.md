@@ -17,12 +17,14 @@
 **Логирование:**
 
 Логирование приложения происходит на уровне INFO, запись в файл logs_user_registration.log, который будет находится в корневой папке.
+Поменять уровень логирования можно в файле application.properties.
 
 **Используемые технологии**
 - Java;
 - Spring-boot;
 - Postgres;
 - OpenAPI (Swagger 3.0);
+- Logger (SFL4J встроенный в Spring-boot);
 - Docker;
 - REST.
 
